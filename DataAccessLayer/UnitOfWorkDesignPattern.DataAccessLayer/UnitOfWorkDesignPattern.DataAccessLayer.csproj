@@ -24,8 +24,4 @@
     <ProjectReference Include="..\..\EntityLayer\UnitOfWorkDesignPattern.EntityLayer\UnitOfWorkDesignPattern.EntityLayer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UnitOfWork\" />
-  </ItemGroup>
-
 </Project>
