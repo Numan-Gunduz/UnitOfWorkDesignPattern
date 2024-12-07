@@ -23,17 +23,36 @@ namespace UnitOfWorkDesignPattern.PresentationLayer.Controllers
         [HttpPost]
         public IActionResult Index(CustomerViewModel model)
         {
-    
-            var value1 = _customerService.TGetByID(model.SenderID);
-            var value2 = _customerService.TGetByID(model.ReceiverID);
+            try
+            {
+                
+                var value1 = _customerService.TGetByID(model.SenderID);
+                var value2 = _customerService.TGetByID(model.ReceiverID);
 
-            value1.CustomerBalance-=model.Amount;
-            value2.CustomerBalance+=model.Amount;
-            List<Customer>modifiledCustomer = new List<Customer> { value1, value2 };
+                if (value1 == null || value2 == null)
+                {
+                    ViewBag.Message = "Gönderen veya Alıcı bulunamadı.";
+                    return View();
+                }
 
+                value1.CustomerBalance -= model.Amount;
+                value2.CustomerBalance += model.Amount;
 
-            _customerService.TMultiUpdate(modifiledCustomer);
+          
+                List<Customer> modifiedCustomers = new List<Customer> { value1, value2 };
+                _customerService.TMultiUpdate(modifiedCustomers);
+
+              
+                ViewBag.Message = "İşlem başarılı bir şekilde gerçekleştirildi!";
+            }
+            catch (Exception ex)
+            {
+                
+                ViewBag.Message = "Bir hata oluştu: " + ex.Message;
+            }
+
             return View();
         }
+
     }
 }

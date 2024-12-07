@@ -14,7 +14,6 @@ namespace UnitOfWorkDesignPattern.DataAccessLayer.Concrete
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Seed Data for Customers
             modelBuilder.Entity<Customer>().HasData(
                 new Customer { CustomerID = 1, CustomerName = "Murat", CustomerBalance = 1000 },
                 new Customer { CustomerID = 2, CustomerName = "Numan", CustomerBalance = 2000 },
@@ -22,8 +21,6 @@ namespace UnitOfWorkDesignPattern.DataAccessLayer.Concrete
                 new Customer { CustomerID = 4, CustomerName = "Kadir", CustomerBalance = 2500 },
                 new Customer { CustomerID = 5, CustomerName = "Fatma", CustomerBalance = 3000 }
             );
-
-            // Seed Data for Processes
             modelBuilder.Entity<Process>().HasData(
                 new Process { ProcessID = 1, Sender = 1, Receiver = 2, Amount = 500 },
                 new Process { ProcessID = 2, Sender = 2, Receiver = 3, Amount = 700 },
